@@ -5,8 +5,7 @@ the ai that want's to catch you.
 
 Fill-A-Pix is also a javascript project that is using p5.js library. This is my own version of fill-a-pix which is a pixel art puzzle.
 
-
-Tetris contains program that is written in C and uses Assembly. It is made for a chipkit in which you use C programming logic along with the chipkit base code.
+tetris_main contains program that is written in C and uses Assembly. It is made for a chipkit in which you use C programming logic along with the chipkit base code.
 
 HTTP_TCP_Server contains a networking server written in Java and it is based on socket server programming. We can have a concurrent http server that uses tcp as it's transport layer.
 
