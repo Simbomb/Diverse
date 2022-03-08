@@ -1,0 +1,30 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+canvas {
+  display: block;
+}
+.block
+{
+  width: 180px;
+  height: 180px;
+  display: show;
+  position: fixed;
+  z-index: 2;
+  background-color: black;
+  border: 2px solid red;
+  user-select: none;
+}
+.cheat
+{
+  position: fixed;
+  margin-top: 185px;
+  width: 80px;
+  user-select: none;
+}
+.cheat:hover
+{
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.38);
+user-select: none;
+}
