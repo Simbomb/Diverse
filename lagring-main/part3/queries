@@ -1,0 +1,46 @@
+1.
+//Shows the number of lessons per month for a specified year
+
+CREATE VIEW LessonsPerMonth AS SELECT EXTRACT(MONTH FROM "date") as "month", COUNT(lesson_id) FROM lesson WHERE "date" >= '2021-01-01' and "date" < '2022-01-01' GROUP BY EXTRACT(MONTH FROM "date");
+
+SELECT * FROM LessonsPerMonth
+
+//Shows the number of individual, group and ensamble lessons per month for a specified year
+
+CREATE VIEW LessonType AS SELECT EXTRACT(MONTH FROM "date") AS month, COUNT(individual.lesson_id) AS "individual", COUNT(group_lesson.lesson_id) AS "group_lesson", COUNT(ensamble.lesson_id) AS "ensamble" FROM lesson FULL JOIN individual ON individual.lesson_id=lesson.lesson_id FULL JOIN group_lesson ON group_lesson.lesson_id=lesson.lesson_id FULL JOIN ensamble ON ensamble.lesson_id=lesson.lesson_id WHERE "date" >= '2021-01-01' AND "date" < '2022-01-01' GROUP BY EXTRACT(MONTH FROM "date");
+
+SELECT * FROM LessonType
+
+2.
+//Shows the average number of lessons per month for a specified year
+
+CREATE VIEW AveragePerMonth AS SELECT CAST(COUNT(individual.lesson_id) AS NUMERIC(36,2)) / 12 AS "individual", CAST(COUNT(group_lesson.lesson_id) AS NUMERIC(36,2)) / 12 AS "group_lesson", CAST(COUNT(ensamble.lesson_id) AS NUMERIC(36,2)) / 12 AS "ensamble" 
+FROM lesson FULL JOIN individual ON individual.lesson_id=lesson.lesson_id 
+FULL JOIN group_lesson ON group_lesson.lesson_id=lesson.lesson_id
+FULL JOIN ensamble ON ensamble.lesson_id=lesson.lesson_id
+WHERE "date" >= '2021-01-01' AND "date" < '2022-01-01';
+
+SELECT * FROM AveragePerMonth
+
+3.
+//Shows the number of lessons an instructor has during this month and order by highest number of lessons
+
+CREATE VIEW Workload AS SELECT * FROM
+(SELECT instructor_id, count(instructor_id) AS num_lesson FROM lesson 
+WHERE EXTRACT(MONTH FROM "date") = EXTRACT(MONTH FROM CURRENT_DATE) AND 
+EXTRACT(YEAR FROM "date") = EXTRACT(YEAR FROM CURRENT_DATE) GROUP BY instructor_id) AS workload WHERE num_lesson > 1 ORDER BY num_lesson DESC;
+
+SELECT * FROM Workload
+
+4.
+//Shows all ensamble lessons during the next week sorted by genre then weekday and tells you how many seats are left
+
+CREATE VIEW EnsambleSeats AS SELECT ensamble.lesson_id, lesson."date", ensamble.genre, 
+CASE WHEN max_attendence = attendence THEN 'Full booked'
+WHEN CAST(max_attendence AS int) - CAST(attendence AS int) <= 2 THEN '1-2 seats left'
+ELSE 'More than 2 seats left'
+END AS Seats
+FROM lesson FULL JOIN ensamble ON ensamble.lesson_id=lesson.lesson_id 
+WHERE "date" >= CURRENT_DATE AND "date" < CURRENT_DATE+7 ORDER BY(ensamble.genre, EXTRACT(ISODOW FROM "date"));
+
+SELECT * FROM EnsambleSeats
