@@ -8,7 +8,7 @@ Fill-A-Pix is also a javascript project that is using p5.js library. This is my 
 
 Tetris contains program that is written in C and uses Assembly. It is made for a chipkit in which you use C programming logic along with the chipkit base code.
 
-HTTP/TCP contains a networking server written in Java and it is based on socket server programming. We can have a concurrent http server that uses tcp as it's transport layer.
+HTTP_TCP_Server contains a networking server written in Java and it is based on socket server programming. We can have a concurrent http server that uses tcp as it's transport layer.
 
 lagring-main is a project in the course IV1351 Data Storage Paradigms where we make a conceptual, logical/physical model and later a database based on this model that can be 
 modified by a using java database connectivety.
