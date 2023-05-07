@@ -8,3 +8,5 @@ tetris_main is a project made during the course IS1200 Computer Hardware Enginee
 
 lagring-main is a project in the course IV1351 Data Storage Paradigms where we make a conceptual, logical/physical model and later a database based on this model that can be 
 modified by a using java database connectivety.
+
+This folder contains programs coded with Elixir during my Programming II ID1019 course. It includes a program that generates a unique Mandelbrot set, an emulator for MIPS, and an Huffman encoder/decoder that compresses text files. Additionally, there are some programming challenges that I have completed.
